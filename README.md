@@ -91,7 +91,6 @@ The UI is intentionally minimal — no unnecessary steps, no friction.
 
 - `npm run dev` — Starts all applications in development mode.
 - `npm run build` — Builds all applications for production.
-- `npm run lint` — Runs the linter across all applications.
 
 ---
 
@@ -116,31 +115,12 @@ Run individual applications directly from the root directory:
 | App | Description | Path |
 |---|---|---|
 | **p2p-safe-swap** | P2P USDC transfer app built with Next.js 16 and Tailwind v4 | `p2p-safe-swap/` |
-| **Frontend** | Legacy marketplace frontend (Next.js) | `apps/frontend/` |
-| **Backend** | Legacy API server (NestJS + GraphQL) | `apps/backend/` |
-
----
-
-## 🧼 Code Formatting & Linting
-
-This project uses [**Biome**](https://biomejs.dev/) for code formatting and linting.
-
-### VS Code Setup
-
-1. Install the [Biome extension](https://marketplace.visualstudio.com/items?itemName=biomejs.biome).
-2. Open settings (`Ctrl + ,` / `Cmd + ,`) and set:
-   - `editor.defaultFormatter`: `Biome`
-   - `editor.formatOnSave`: `true`
-
-> The project also uses Biome in Git hooks to automatically check and format code before commits and pushes.
 
 ---
 
 ## 📚 Documentation
 
 - [p2p-safe-swap README](p2p-safe-swap/README.md)
-- [Frontend Documentation](apps/frontend/README.md)
-- [Backend Documentation](apps/backend/README.md)
 
 ## 🤝 Contributing
 
@@ -160,30 +140,12 @@ We appreciate and welcome contributions! Please review our [CONTRIBUTING GUIDELI
       </a>
     </td>
     <td align="center" valign="top" width="25%">
-      <img src="https://avatars.githubusercontent.com/u/59376626?v=4" alt="Derian Rodríguez Durán" width="120" />
-      <br />
-      <strong>Derian Rodríguez Durán</strong>
-      <br />
-      <a href="https://github.com/derianrddev" target="_blank">
-        GitHub
-      </a>
-    </td>
-    <td align="center" valign="top" width="25%">
       <img src="https://avatars.githubusercontent.com/u/85724318?v=4" alt="Diego Duarte Fernández" width="120" />
       <br />
       <strong>Diego Duarte Fernández</strong>
       <br />
       <a href="https://github.com/diegoTech14" target="_blank">
         GitHub
-      </a>
-    </td>
-    <td align="center" valign="top" width="25%">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVtyx7mtfp-kgZAnvXHmmTIPR-sRVJP1NHwA&s" alt="OnlyDust" width="120" />
-      <br />
-      <strong>Open Source Contributors</strong>
-      <br />
-      <a href="https://www.onlydust.com/" target="_blank">
-        OnlyDust
       </a>
     </td>
   </tr>
