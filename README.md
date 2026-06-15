@@ -121,6 +121,7 @@ Run individual applications directly from the root directory:
 ## 📚 Documentation
 
 - [p2p-safe-swap README](p2p-safe-swap/README.md)
+- [colors doc](https://github.com/Kaizenode/SafeSwap/blob/main/docs/guidelines/colors.md)
 
 ## 🤝 Contributing
 
