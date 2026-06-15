@@ -1,38 +1,36 @@
 
 ![SAFESWAP LOGO_ON RICH BLACK](https://github.com/user-attachments/assets/8260378d-07dd-4309-b7e0-da42247fa21c)
 # SafeSwap
-# Web Marketplace with Escrow Contracts on Stellar
+# P2P USDC Transfers on Stellar
 
-Welcome to the **Web Marketplace with Escrow Contracts**, a decentralized platform for buying and selling products with escrowed payments. Powered by Stellar and integrated with the **Trustless Work API**, this marketplace offers a secure and trustless environment for transactions across various product categories.
+Welcome to **SafeSwap**, a peer-to-peer platform that allows users to transfer **USDC** between Stellar wallet addresses through escrow-secured transactions. Powered by the **Stellar Network** and integrated with the **Trustless Work API**, SafeSwap ensures every transfer is transparent, trustless, and protected by smart contracts.
 
 ## 🚀 Features
 
-- **Escrow-Based Transactions**: Funds are securely held in Stellar escrow contracts, ensuring both buyer and seller satisfaction.
-- **Diverse Product Categories**: Supports a wide variety of products and services.
-- **Trustless Transactions**: With the Trustless Work API, no central authority controls the escrow process; smart contracts handle all interactions.
-- **Blockchain-Powered**: Built on the Stellar blockchain, providing fast, low-cost, and transparent transactions.
-- **User-Friendly Interface**: Simple and intuitive UI designed for a seamless marketplace experience.
+- **P2P USDC Transfers**: Send USDC directly to any Stellar wallet address in a secure, peer-to-peer flow.
+- **Escrow-Protected Transactions**: Funds are held in Stellar escrow contracts and only released when both parties fulfill the agreed conditions.
+- **Trustless by Design**: No central authority controls the process — smart contracts on Stellar handle every step automatically.
+- **Trustless Work API**: Manages escrow creation, funding, completion, and dispute resolution.
+- **Fast & Low-Cost**: Built on Stellar for near-instant settlement with minimal transaction fees.
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Next.js, Tailwind CSS, shadcn/ui
-- **Backend**: NestJS, GraphQL (Apollo Server), Prisma
-- **Blockchain**: Stellar Network for handling decentralized, escrow-based transactions
-- **API**: Trustless Work API for managing the creation of the Smart Contracts
-- **Database**: PostgreSQL
+- **P2P App**: Next.js, Tailwind CSS v4, shadcn/ui
+- **Backend (legacy)**: NestJS, GraphQL (Apollo Server), Prisma
+- **Blockchain**: Stellar Network
+- **API**: Trustless Work API for escrow smart contract management
+- **Database**: PostgreSQL, Supabase
 
-## 🔑 Key Components
+## 🔑 How It Works
 
-1. **Escrow Contracts on Stellar**:
-   - Utilizes Stellar’s multi-signature and escrow capabilities to ensure funds are securely held until both parties agree to complete the transaction.
-   - The smart contract manages the funds automatically, releasing payment only when both the buyer and seller meet the contract conditions.
+The UI is intentionally minimal — no unnecessary steps, no friction.
 
-2. **Trustless Work API Integration**:
-   - The Trustless Work API is used to manage contract interactions, initiate transactions, and handle workflow automations for the escrow process.
-
-3. **Product Marketplace**:
-   - A user-friendly platform where sellers can list products, and buyers can browse and make purchases.
-   - Categories for a wide variety of products, from physical items to digital goods.
+1. **Browse Listings**: Users see a simple list of people who want to buy or sell USDC. Each listing shows the amount, direction (buy/sell), and the user's Stellar wallet address.
+2. **Match & Connect**: A user picks a counterpart from the list whose offer matches their need.
+3. **Initiate the Transfer**: Both parties agree on the amount. An escrow contract is created via the Trustless Work API, locking the USDC on the Stellar blockchain.
+4. **Fund the Escrow**: The sender deposits the USDC into the escrow contract.
+5. **Release**: Once both parties confirm, the contract releases the funds to the recipient's Stellar wallet automatically.
+6. **Dispute Resolution**: If something goes wrong, either party can open a dispute handled by the escrow contract.
 
 ## 📄 Usage
 
@@ -41,29 +39,99 @@ Welcome to the **Web Marketplace with Escrow Contracts**, a decentralized platfo
 - **Node.js** version 20 or higher
     - Refer to the [Node.js official documentation](https://nodejs.org/) to download and install the latest version.
     - To check your installed Node.js version:
-        
+
         ```bash
         node -v
         ```
-        
+
 - **npm** version 10.9.2 or higher
-    - Refer to the [npm official documentation](https://docs.npmjs.com/) for detailed instructions.
     - To check your installed npm version:
-        
+
         ```bash
         npm -v
         ```
-    - To globally install or update npm to version 10.9.2:
-        
+
+    - To globally install or update npm:
+
         ```bash
         npm install -g npm@10.9.2
         ```
 
-        After updating, recheck the version using npm -v.
+### Installation
+
+1. **Clone the Repository**:
+
+    ```bash
+    git clone https://github.com/your-username/SafeSwap.git
+    cd SafeSwap
+    ```
+
+2. **Install Dependencies**:
+
+    ```bash
+    npm install
+    ```
+
+3. **Environment Variables**:
+
+    Copy `.env.example` to `.env.local` in the relevant app folder and fill in your values:
+
+    ```bash
+    cp p2p-safe-swap/.env.local p2p-safe-swap/.env.local
+    ```
+
+    Required variables:
+    - `NEXT_PUBLIC_SUPABASE_URL` — your Supabase project URL
+    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — your Supabase anon key
+    - `TRUSTLESS_WORK_API_KEY` — your Trustless Work API key (server-side only)
+
+---
+
+### Available Commands
+
+- `npm run dev` — Starts all applications in development mode.
+- `npm run build` — Builds all applications for production.
+- `npm run lint` — Runs the linter across all applications.
+
+---
+
+### Running Specific Applications
+
+Run individual applications directly from the root directory:
+
+1. **P2P App**:
+
+    ```bash
+    cd p2p-safe-swap && npm run dev
+    ```
+
+2. **Frontend (legacy)**:
+
+    ```bash
+    npm run dev:frontend
+    ```
+
+3. **Backend (legacy)**:
+
+    ```bash
+    npm run dev:backend
+    ```
+
+---
+
+### Applications in the Monorepo
+
+| App | Description | Path |
+|---|---|---|
+| **p2p-safe-swap** | P2P USDC transfer app built with Next.js 16 and Tailwind v4 | `p2p-safe-swap/` |
+| **Frontend** | Legacy marketplace frontend (Next.js) | `apps/frontend/` |
+| **Backend** | Legacy API server (NestJS + GraphQL) | `apps/backend/` |
+
+---
 
 ## 🧼 Code Formatting & Linting
 
-This project uses [**Biome**](https://biomejs.dev/) for code formatting and linting to ensure consistency across the codebase.
+This project uses [**Biome**](https://biomejs.dev/) for code formatting and linting.
 
 ### VS Code Setup
 
@@ -72,91 +140,19 @@ This project uses [**Biome**](https://biomejs.dev/) for code formatting and lint
    - `editor.defaultFormatter`: `Biome`
    - `editor.formatOnSave`: `true`
 
-Biome will auto-format your code on save and show lint issues in real time (e.g., unused variables, invalid patterns).
-
-> The project also uses Biome in Git hooks to check and format code automatically before commits and pushes.
-
-### Installation
-
-1. **Clone the Repository**:
-    
-    ```bash
-    git clone https://github.com/your-username/SafeSwap.git
-    cd SafeSwap
-    ```
-    
-2. **Install Dependencies**:
-    - Install the global dependencies for the monorepo and its workspaces:
-    
-    ```bash
-    npm install
-    ```
-    
-    This will install all the necessary dependencies for the applications within the `apps/*` subdirectories.
-
----
-
-### Available Commands
-
-- `npm run dev` - Starts the development server of all applications.
-- `npm run build` - Builds the production version of all applications.
-- `npm run lint` - Runs the linter configured of all applications.
-
----
-
-### Managing Dependencies and Running Specific Applications
-
-### Adding Dependencies
-
-If you need to add a dependency to any of the applications within the monorepo, you must navigate to the respective application directory and then install the dependency from there.
-    
-### Running Specific Applications
-
-Run individual applications directly from the root directory:
-
-1. **Frontend**:
-    
-    ```bash
-    npm run dev:frontend
-    ```
-    
-2. **backend**:
-    
-    ```bash
-    npm run dev:backend
-    ```
-    
----
-
-### Applications in the Monorepo
-
-The monorepo contains the following applications:
-
-1. **Frontend (Next.js)**
-    - Description: The frontend application built with Next.js, providing the user interface for the project.
-    - Path: apps/frontend
-2. **Backend (Nest.js)**
-    - Description: The backend application built with Nest.js, handling business logic and APIs to interact with the frontend and other services.
-    - Path: apps/backend
+> The project also uses Biome in Git hooks to automatically check and format code before commits and pushes.
 
 ---
 
 ## 📚 Documentation
 
-For more details on each of the applications, please refer to the respective README files:
-
+- [p2p-safe-swap README](p2p-safe-swap/README.md)
 - [Frontend Documentation](apps/frontend/README.md)
 - [Backend Documentation](apps/backend/README.md)
 
-### How It Works
-
-1. **Listing a Product**: Sellers can create listings for products. Each listing includes information such as price, description, and images.
-2. **Making a Purchase**: Buyers can select a product and initiate a purchase. Funds are transferred to an escrow account on the Stellar blockchain.
-3. **Escrow Release**: Upon completion of the agreed-upon conditions, the Trustless Work API triggers the release of funds to the seller’s Stellar account.
-
 ## 🤝 Contributing
 
-We appreciate and welcome contributions! To get started, please review our [CONTRIBUTING GUIDELINES](docs/guidelines/CONTRIBUTION_GUIDELINES.md) and [GIT GUIDELINES](docs/guidelines/GIT_GUIDELINES.md) for detailed instructions on how to contribute effectively.
+We appreciate and welcome contributions! Please review our [CONTRIBUTING GUIDELINES](docs/guidelines/CONTRIBUTION_GUIDELINES.md) and [GIT GUIDELINES](docs/guidelines/GIT_GUIDELINES.md) before submitting a PR.
 
 ## 🧑‍💻 Authors
 
@@ -204,4 +200,3 @@ We appreciate and welcome contributions! To get started, please review our [CONT
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
