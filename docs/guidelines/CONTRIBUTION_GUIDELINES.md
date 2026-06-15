@@ -71,7 +71,7 @@ git push origin your-branch-name
 
 ## 8. 🤝 Join the Contributors Telegram
 
-**Stay connected! Join our [Contributors Telegram](https://t.me/+q13pwLWZYkhhMmYx) to collaborate, ask questions, and get updates. 💬**
+**Stay connected! Join our [Contributors Telegram](https://t.me/+WRil2y52XPFlZmYx) to collaborate, ask questions, and get updates. 💬**
 
 ---
 Let’s build together! 🚀 If you have any questions, feel free to ask. Happy coding! 💻 ⚡
