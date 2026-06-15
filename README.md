@@ -102,19 +102,11 @@ Run individual applications directly from the root directory:
 1. **P2P App**:
 
     ```bash
-    cd p2p-safe-swap && npm run dev
+    cd p2p-safe-swap
     ```
-
-2. **Frontend (legacy)**:
-
+    
     ```bash
-    npm run dev:frontend
-    ```
-
-3. **Backend (legacy)**:
-
-    ```bash
-    npm run dev:backend
+    npm run dev
     ```
 
 ---
