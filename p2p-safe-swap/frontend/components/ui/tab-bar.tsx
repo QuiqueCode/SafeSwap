@@ -20,6 +20,7 @@ export function TabBar({
   const tabRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+    if (tabs.length === 0) return;
     let next = index;
     if (e.key === "ArrowRight") next = (index + 1) % tabs.length;
     else if (e.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
@@ -30,6 +31,8 @@ export function TabBar({
     onChange(next);
     tabRefs.current[next]?.focus();
   };
+
+  if (tabs.length === 0) return null;
 
   return (
     <div
@@ -46,7 +49,7 @@ export function TabBar({
         const isActive = index === activeIndex;
         return (
           <button
-            key={index}
+            key={`${label}-${index}`}
             ref={(el) => {
               tabRefs.current[index] = el;
             }}
