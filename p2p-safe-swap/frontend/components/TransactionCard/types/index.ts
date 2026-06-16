@@ -1,4 +1,6 @@
 
+export type TransactionCardLang = "es" | "en";
+
 export interface TransactionCardProperties{
     user:string;
     address:string;
@@ -10,6 +12,7 @@ export interface TransactionCardProperties{
     maxLimit:number;
     windowMinutes:number;
     paymentMethods:string[];
+    lang?: TransactionCardLang;
     onBuy:() => void;
 }
 

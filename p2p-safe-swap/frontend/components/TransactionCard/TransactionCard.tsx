@@ -2,7 +2,7 @@
 import { Clock, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { TransactionCardProperties } from "./types";
-import { formatNumber, getInitials, truncateAddress } from "./utils";
+import { formatNumber, getInitials, translations, truncateAddress } from "./utils";
 
 
 
@@ -17,9 +17,11 @@ export function TransactionCard({
   maxLimit,
   windowMinutes,
   paymentMethods,
+  lang = "en",
   onBuy,
 }: TransactionCardProperties) {
   const [copied, setCopied] = useState(false);
+  const t = translations[lang];
 
   function handleCopyAddress() {
     navigator.clipboard.writeText(address);
@@ -71,11 +73,11 @@ export function TransactionCard({
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-[#54615B] text-sm">Disponible</span>
+            <span className="text-[#54615B] text-sm">{t.available}</span>
             <span className="font-semibold text-[#1A2721] text-sm">{formatNumber(available)}</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-[#54615B] text-sm">Ventana</span>
+            <span className="text-[#54615B] text-sm">{t.window}</span>
             <div className="flex items-center gap-1 text-[#1A2721]">
               <Clock size={14} className="text-[#1A2721]" />
               <span className="text-sm">{windowMinutes} min</span>
@@ -84,7 +86,7 @@ export function TransactionCard({
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-[#54615B] text-sm">Límites</span>
+          <span className="text-[#54615B] text-sm">{t.limits}</span>
           <span className="font-semibold text-[#1A2721] text-sm">{minLimit} – {maxLimit} €</span>
         </div>
       </div>
@@ -103,7 +105,7 @@ export function TransactionCard({
           onClick={onBuy}
           className="bg-[#23C987] hover:bg-[#1db87a] active:bg-[#18a86e] text-white rounded-full px-7 py-2.5 font-semibold text-sm shrink-0 transition-colors cursor-pointer"
         >
-          Comprar
+          {t.buy}
         </button>
       </div>
 

@@ -1,3 +1,19 @@
+import { TransactionCardLang } from "../types";
+
+export const translations = {
+  es: {
+    available: "Disponible",
+    window:    "Ventana",
+    limits:    "Límites",
+    buy:       "Comprar",
+  },
+  en: {
+    available: "Available",
+    window:    "Time window",
+    limits:    "Limits",
+    buy:       "Buy",
+  },
+} satisfies Record<TransactionCardLang, object>;
 
 export function formatNumber(n: number) {
   return Math.floor(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
