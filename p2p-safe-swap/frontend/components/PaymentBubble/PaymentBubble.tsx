@@ -2,12 +2,8 @@
 
 import { ArrowUpRight, ArrowDownLeft, ArrowRight, Check, X } from "lucide-react";
 import { PaymentBubbleProperties } from "./types";
-import { formatCurrency } from "./utils";
-
-const variantLabel = {
-  sent:    "PAGO ENVIADO",
-  request: "SOLICITUD DE PAGO",
-} as const;
+import { formatCurrency, translations } from "./utils";
+import { Button } from "../ui/Button/Button";
 
 export function PaymentBubble({
   amount,
@@ -16,12 +12,14 @@ export function PaymentBubble({
   variant,
   status,
   side,
+  lang = "en",
   onPay,
   onReject,
   onViewReceipt,
 }: PaymentBubbleProperties) {
-  const isSent   = variant === "sent";
-  const isDark   = isSent;
+  const isSent = variant === "sent";
+  const isDark = isSent;
+  const t      = translations[lang];
 
   const cornerClass = side === "sender"
     ? "rounded-tl-3xl rounded-tr-3xl rounded-bl-3xl rounded-br-md"
@@ -30,7 +28,6 @@ export function PaymentBubble({
   return (
     <div className={`w-72 overflow-hidden ${cornerClass} ${isDark ? "bg-[#0E1C16] text-white" : "bg-white text-[#1A2721] border border-[#D2DED8]"}`}>
 
-    
       <div className="p-4 flex flex-col gap-3">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${isDark ? "bg-[#24312B]" : "bg-[#EBF4F0]"}`}>
@@ -41,7 +38,7 @@ export function PaymentBubble({
           </div>
           <div>
             <p className="text-xs font-semibold tracking-widest text-[#95A29C]">
-              {variantLabel[variant]}
+              {isSent ? t.sent : t.request}
             </p>
             <p className={`text-2xl font-bold leading-tight ${isDark ? "text-white" : "text-[#1A2721]"}`}>
               {formatCurrency(amount)} {currency}
@@ -56,48 +53,42 @@ export function PaymentBubble({
         )}
       </div>
 
- 
       <div className={`h-px ${isDark ? "bg-[#24312B]" : "bg-[#D2DED8]"}`} />
 
-  
       <div className={`px-4 py-3 flex items-center justify-between ${isDark ? "bg-[#162c23]" : "bg-[#e8f5ef]"}`}>
 
         {status === "completed" && <>
           <span className="flex items-center gap-1 text-xs text-[#95A29C]">
             <Check size={14} />
-            Completado
+            {t.completed}
           </span>
           <button onClick={onViewReceipt} className={`flex items-center gap-1 text-xs ${isDark ? "text-[#95A29C] hover:text-white" : "text-[#54615B] hover:text-[#1A2721]"} transition-colors cursor-pointer`}>
-            Ver recibo <ArrowRight size={12} />
+            {t.viewReceipt} <ArrowRight size={12} />
           </button>
         </>}
 
         {status === "pending" && variant === "request" && <>
           <span className="flex items-center gap-1.5 text-xs text-[#54615B]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D2DED8]" />
-            Pendiente
+            {t.pending}
           </span>
           <div className="flex items-center gap-4">
-            <button onClick={onReject} className="text-xs text-[#54615B] hover:text-[#1A2721] transition-colors cursor-pointer">
-              Rechazar
-            </button>
-            <button onClick={onPay} className="bg-[#23C987] hover:bg-[#1db87a] text-white rounded-full px-4 py-1.5 text-xs font-semibold transition-colors cursor-pointer">
-              Pagar
-            </button>
+            <Button variant="ghost" size="sm" label={t.reject} onClick={onReject} />
+            <Button variant="primary" size="sm" label={t.pay} onClick={onPay} />
           </div>
         </>}
 
         {status === "pending" && variant === "sent" && (
           <span className="flex items-center gap-1.5 text-sm text-[#95A29C]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#95A29C]" />
-            Pendiente
+            {t.pending}
           </span>
         )}
 
         {status === "rejected" && (
           <span className="flex items-center gap-1.5 text-sm text-[#FF5957]">
             <X size={14} />
-            Rechazado
+            {t.rejected}
           </span>
         )}
 

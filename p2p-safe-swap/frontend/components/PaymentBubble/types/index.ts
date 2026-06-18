@@ -1,3 +1,4 @@
+export type PaymentBubbleLang    = "es" | "en";
 export type PaymentBubbleSide    = "sender" | "receiver";
 export type PaymentBubbleVariant = "sent" | "request";
 export type PaymentBubbleStatus  = "completed" | "pending" | "rejected";
@@ -9,7 +10,8 @@ export interface PaymentBubbleProperties {
   variant:   PaymentBubbleVariant;
   status:    PaymentBubbleStatus;
   side:      PaymentBubbleSide;
-  onPay:          () => void;
-  onReject:       () => void;
-  onViewReceipt?: () => void;
+  lang?:     PaymentBubbleLang;
+  onPay?:          () => void;
+  onReject?:       () => void;
+  onViewReceipt?:  () => void;
 }
