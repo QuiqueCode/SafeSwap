@@ -3,6 +3,7 @@ import { Clock, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { TransactionCardProperties } from "./types";
 import { formatNumber, getInitials, translations, truncateAddress } from "./utils";
+import { Button } from "../ui/Button/Button";
 
 
 
@@ -65,29 +66,29 @@ export function TransactionCard({
         </div>
 
         <div className="text-right shrink-0">
-          <p className="font-bold text-[#1A2721] text-3xl leading-tight">{price}</p>
-          <p className="text-[#95A29C] text-sm font-medium">EUR / USDT</p>
+          <p className="font-bold text-[#1A2721] text-xl sm:text-3xl leading-tight">{price}</p>
+          <p className="text-[#95A29C] text-xs sm:text-sm font-medium">EUR / USDT</p>
         </div>
       </div>
 
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-[#54615B] text-sm">{t.available}</span>
-            <span className="font-semibold text-[#1A2721] text-sm">{formatNumber(available)}</span>
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[#54615B] text-xs sm:text-sm">{t.available}</span>
+            <span className="font-semibold text-[#1A2721] text-xs sm:text-sm">{formatNumber(available)}</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-[#54615B] text-sm">{t.window}</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[#54615B] text-xs sm:text-sm">{t.window}</span>
             <div className="flex items-center gap-1 text-[#1A2721]">
-              <Clock size={14} className="text-[#1A2721]" />
-              <span className="text-sm">{windowMinutes} min</span>
+              <Clock size={13} className="text-[#1A2721] shrink-0" />
+              <span className="text-xs sm:text-sm">{windowMinutes} min</span>
             </div>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-[#54615B] text-sm">{t.limits}</span>
-          <span className="font-semibold text-[#1A2721] text-sm">{minLimit} – {maxLimit} €</span>
+          <span className="text-[#54615B] text-xs sm:text-sm">{t.limits}</span>
+          <span className="font-semibold text-[#1A2721] text-xs sm:text-sm">{minLimit} – {maxLimit} €</span>
         </div>
       </div>
 
@@ -101,12 +102,7 @@ export function TransactionCard({
        
         
         </div>
-        <button
-          onClick={onBuy}
-          className="bg-[#23C987] hover:bg-[#1db87a] active:bg-[#18a86e] text-white rounded-full px-7 py-2.5 font-semibold text-sm shrink-0 transition-colors cursor-pointer"
-        >
-          {t.buy}
-        </button>
+        <Button variant="primary" label={t.buy} onClick={onBuy} />
       </div>
 
     </div>
