@@ -19,6 +19,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-chat-bubble-outgoing: var(--chat-bubble-outgoing);
+  --color-chat-bubble-outgoing-foreground: var(--chat-bubble-outgoing-foreground);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -44,6 +46,8 @@
   --border: hsl(240 5.9% 90%);
   --input: hsl(240 5.9% 90%);
   --ring: hsl(164 98% 33%);
+  --chat-bubble-outgoing: #052016;
+  --chat-bubble-outgoing-foreground: hsl(0 0% 98%);
   --radius: 0.75rem;
 }
 
