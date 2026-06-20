@@ -10,7 +10,7 @@ export function DateGroup({ label, className, ...props }: DateGroupProps) {
     <h3
       data-slot="date-group"
       className={cn(
-        "px-1 text-xs font-medium uppercase tracking-wider text-muted-foreground",
+        "px-1 text-[11px] font-normal uppercase tracking-[0.18em] text-muted-foreground",
         className
       )}
       {...props}
