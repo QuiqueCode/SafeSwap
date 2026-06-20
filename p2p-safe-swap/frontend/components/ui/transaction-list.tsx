@@ -1,16 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { Check, Clock, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DateGroupHeader } from "@/frontend/components/ui/date-group-header";
+import { SearchBar } from "@/frontend/components/ui/search-bar";
 import { TabBar } from "@/frontend/components/ui/tab-bar";
+import { TransactionRow } from "@/frontend/components/ui/transaction-row";
 
 export interface Transaction {
   id: string;
-  name: string;
-  note?: string;
+  address: string;
+  memo?: string;
   amount: number;
-  currency?: string;
   date: string;
   type: "in" | "out" | "request";
 }
@@ -33,13 +34,6 @@ const TABS: { value: TransactionTab; label: string }[] = [
   { value: "requests", label: "Solicitudes" },
 ];
 
-function getInitials(name: string): string {
-  const parts = name.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0) return "?";
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
-}
-
 function startOfDay(date: Date): Date {
   const next = new Date(date);
   next.setHours(0, 0, 0, 0);
@@ -60,27 +54,16 @@ function getSectionLabel(date: Date, today: Date): string {
     .toUpperCase();
 }
 
-function formatAmount(amount: number, currency = "€"): string {
-  const absolute = Math.abs(amount).toFixed(2);
-  const sign = amount >= 0 ? "+" : "-";
-  return `${sign}${absolute} ${currency}`;
-}
-
 function formatTimestamp(date: Date, today: Date): string {
   const target = startOfDay(date);
   const todayStart = startOfDay(today);
   const yesterdayStart = new Date(todayStart);
   yesterdayStart.setDate(yesterdayStart.getDate() - 1);
 
-  if (target.getTime() === todayStart.getTime()) {
-    return date.toLocaleTimeString("es-ES", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
-  }
-
-  if (target.getTime() === yesterdayStart.getTime()) {
+  if (
+    target.getTime() === todayStart.getTime() ||
+    target.getTime() === yesterdayStart.getTime()
+  ) {
     return date.toLocaleTimeString("es-ES", {
       hour: "2-digit",
       minute: "2-digit",
@@ -94,16 +77,23 @@ function formatTimestamp(date: Date, today: Date): string {
   });
 }
 
+function getDirection(
+  transaction: Transaction
+): "in" | "out" {
+  if (transaction.type === "request") return "in";
+  return transaction.type;
+}
+
 function matchesSearch(transaction: Transaction, query: string): boolean {
   const normalized = query.trim().toLowerCase();
   if (!normalized) return true;
 
-  const nameMatch = transaction.name.toLowerCase().includes(normalized);
+  const addressMatch = transaction.address.toLowerCase().includes(normalized);
   const amountMatch = Math.abs(transaction.amount)
     .toFixed(2)
     .includes(normalized.replace(",", "."));
 
-  return nameMatch || amountMatch;
+  return addressMatch || amountMatch;
 }
 
 function matchesTab(transaction: Transaction, tab: TransactionTab): boolean {
@@ -157,21 +147,7 @@ export function TransactionList({
       className={cn("flex w-full flex-col gap-4", className)}
       {...props}
     >
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-        <input
-          type="search"
-          value={searchQuery}
-          onChange={(event) => onSearch(event.target.value)}
-          placeholder="Buscar transacciones..."
-          aria-label="Buscar transacciones"
-          className={cn(
-            "h-12 w-full rounded-2xl border border-transparent bg-primary/5 pl-11 pr-4 text-sm",
-            "text-foreground placeholder:text-muted-foreground",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
-          )}
-        />
-      </div>
+      <SearchBar value={searchQuery} onChange={onSearch} />
 
       <TabBar
         tabs={tabLabels}
@@ -188,55 +164,21 @@ export function TransactionList({
         <div className="flex flex-col gap-5">
           {groupedTransactions.map(([sectionLabel, sectionTransactions]) => (
             <section key={sectionLabel} className="flex flex-col gap-2">
-              <h2 className="px-1 text-xs font-semibold tracking-wide text-muted-foreground">
-                {sectionLabel}
-              </h2>
+              <DateGroupHeader label={sectionLabel} />
 
-              <div className="overflow-hidden rounded-2xl border border-border bg-card">
-                {sectionTransactions.map((transaction, index) => {
+              <div className="flex flex-col gap-2">
+                {sectionTransactions.map((transaction) => {
                   const date = new Date(transaction.date);
-                  const isIncoming = transaction.amount >= 0;
-                  const currency = transaction.currency ?? "€";
 
                   return (
-                    <div
+                    <TransactionRow
                       key={transaction.id}
-                      className={cn(
-                        "flex items-center gap-3 px-4 py-3",
-                        index > 0 && "border-t border-border"
-                      )}
-                    >
-                      <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
-                        {getInitials(transaction.name)}
-                      </div>
-
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold text-foreground">
-                          {transaction.name}
-                        </p>
-                        {transaction.note ? (
-                          <p className="truncate text-xs text-muted-foreground">
-                            {transaction.note}
-                          </p>
-                        ) : null}
-                      </div>
-
-                      <div className="flex shrink-0 flex-col items-end gap-1">
-                        <p
-                          className={cn(
-                            "text-sm font-semibold",
-                            isIncoming ? "text-primary" : "text-foreground"
-                          )}
-                        >
-                          {formatAmount(transaction.amount, currency)}
-                        </p>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Check className="size-3 text-primary" />
-                          <Clock className="size-3" />
-                          <span>{formatTimestamp(date, today)}</span>
-                        </div>
-                      </div>
-                    </div>
+                      address={transaction.address}
+                      memo={transaction.memo}
+                      timestamp={formatTimestamp(date, today)}
+                      amount={Math.abs(transaction.amount)}
+                      direction={getDirection(transaction)}
+                    />
                   );
                 })}
               </div>
