@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { OperationsScreen } from "@/frontend/components/p2p";
+import { P2POrderList } from "@/frontend/components/p2p";
 import type { OrderMode, P2POrder } from "@/frontend/components/p2p";
 
 const MOCK_ORDERS: P2POrder[] = [
@@ -57,12 +57,12 @@ const MOCK_ORDERS: P2POrder[] = [
 
 const BEST_PRICE = 0.9201;
 
-export default function OperationsPage() {
+export default function OrdersPage() {
   const [mode, setMode] = useState<OrderMode>("buy");
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md flex-col">
-      <OperationsScreen
+      <P2POrderList
         orders={MOCK_ORDERS}
         bestPrice={BEST_PRICE}
         mode={mode}

@@ -6,7 +6,7 @@ import { BestPriceCard } from "./best-price-card";
 import { P2POrderCard } from "./p2p-order-card";
 import type { CurrencyPair, OrderMode, P2POrder } from "./types";
 
-export interface OperationsScreenProps {
+export interface P2POrderListProps {
   orders: P2POrder[];
   bestPrice: number;
   mode: OrderMode;
@@ -33,21 +33,21 @@ function resolveCurrencyPair(orders: P2POrder[]): CurrencyPair {
   return { base: "USDT", quote: "EUR" };
 }
 
-export function OperationsScreen({
+export function P2POrderList({
   orders,
   bestPrice,
   mode,
   onModeChange,
   onBuy,
   className,
-}: OperationsScreenProps) {
+}: P2POrderListProps) {
   const sortedOrders = sortOrdersByBestPrice(orders, mode);
   const currencyPair = resolveCurrencyPair(orders);
   const activeIndex = MODE_TABS.indexOf(mode);
 
   return (
     <div
-      data-slot="operations-screen"
+      data-slot="p2p-order-list"
       className={cn(
         "flex h-full w-full flex-col gap-4 bg-background p-4 sm:p-6",
         className
