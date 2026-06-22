@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { getCurrencySymbol } from "./currency";
 import type { OrderMode, P2POrder } from "./types";
 
 export interface P2POrderCardProps {
@@ -28,7 +29,7 @@ function pickAvatarColor(seed: string) {
 }
 
 function formatNumber(value: number) {
-  return new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 }).format(
+  return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(
     value
   );
 }
@@ -131,7 +132,7 @@ export function P2POrderCard({
         <dt className="text-muted-foreground">Límites</dt>
         <dd className="text-right font-medium text-foreground tabular-nums">
           {formatNumber(order.limits.min)} – {formatNumber(order.limits.max)}{" "}
-          {order.currencyPair.base}
+          {getCurrencySymbol(order.currencyPair.base)}
         </dd>
         <dd className="flex items-center gap-1.5 justify-self-end text-xs text-muted-foreground">
           <svg

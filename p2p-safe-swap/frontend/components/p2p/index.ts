@@ -1,5 +1,6 @@
 export { BestPriceCard } from "./best-price-card";
 export type { BestPriceCardProps } from "./best-price-card";
+export { getCurrencySymbol } from "./currency";
 export { OperationsScreen } from "./operations-screen";
 export type { OperationsScreenProps } from "./operations-screen";
 export { P2POrderCard } from "./p2p-order-card";
