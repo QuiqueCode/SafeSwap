@@ -19,6 +19,7 @@ export function TransactionCard({
   windowMinutes,
   paymentMethods,
   lang = "en",
+  mode = "buy",
   onBuy,
 }: TransactionCardProperties) {
   const [copied, setCopied] = useState(false);
@@ -102,7 +103,7 @@ export function TransactionCard({
        
         
         </div>
-        <Button variant="primary" label={t.buy} onClick={onBuy} />
+        <Button variant="primary" label={mode === "sell" ? t.sell : t.buy} onClick={onBuy} />
       </div>
 
     </div>

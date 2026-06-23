@@ -1,6 +1,8 @@
 
 export type TransactionCardLang = "es" | "en";
 
+export type TransactionCardMode = "buy" | "sell";
+
 export interface TransactionCardProperties{
     user:string;
     address:string;
@@ -13,6 +15,7 @@ export interface TransactionCardProperties{
     windowMinutes:number;
     paymentMethods:string[];
     lang?: TransactionCardLang;
+    mode?: TransactionCardMode;
     onBuy:() => void;
 }
 
