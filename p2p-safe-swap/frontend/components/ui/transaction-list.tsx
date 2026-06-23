@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { DateGroupHeader } from "@/frontend/components/ui/date-group-header";
+import { DateGroup } from "@/frontend/components/ui/date-group";
 import { SearchBar } from "@/frontend/components/ui/search-bar";
 import { TabBar } from "@/frontend/components/ui/tab-bar";
 import { TransactionRow } from "@/frontend/components/ui/transaction-row";
@@ -164,10 +164,10 @@ export function TransactionList({
         <div className="flex flex-col gap-5">
           {groupedTransactions.map(([sectionLabel, sectionTransactions]) => (
             <section key={sectionLabel} className="flex flex-col gap-2">
-              <DateGroupHeader label={sectionLabel} />
+              <DateGroup label={sectionLabel} />
 
-              <div className="flex flex-col gap-2">
-                {sectionTransactions.map((transaction) => {
+              <div className="overflow-hidden rounded-2xl border border-border bg-card">
+                {sectionTransactions.map((transaction, index) => {
                   const date = new Date(transaction.date);
 
                   return (
@@ -178,6 +178,10 @@ export function TransactionList({
                       timestamp={formatTimestamp(date, today)}
                       amount={Math.abs(transaction.amount)}
                       direction={getDirection(transaction)}
+                      className={cn(
+                        "rounded-none border-0 bg-transparent px-4 py-3",
+                        index > 0 && "border-t border-border"
+                      )}
                     />
                   );
                 })}
