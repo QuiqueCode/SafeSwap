@@ -11,6 +11,7 @@ export interface OrderUser {
   verified: boolean;
   rating: number;
   opsCount: number;
+  address: string;
 }
 
 export interface OrderLimits {

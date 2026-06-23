@@ -1,9 +1,9 @@
 "use client";
 
+import { TransactionCard } from "@/frontend/components/TransactionCard/TransactionCard";
 import { TabBar } from "@/frontend/components/ui/tab-bar";
 import { cn } from "@/lib/utils";
 import { BestPriceCard } from "./best-price-card";
-import { P2POrderCard } from "./p2p-order-card";
 import type { CurrencyPair, OrderMode, P2POrder } from "./types";
 
 export interface P2POrderListProps {
@@ -78,11 +78,21 @@ export function P2POrderList({
           </div>
         ) : (
           sortedOrders.map((order) => (
-            <P2POrderCard
+            <TransactionCard
               key={order.id}
-              order={order}
+              user={order.user.name}
+              address={order.user.address}
+              rating={order.user.rating}
+              operationCount={order.user.opsCount}
+              price={order.price}
+              available={order.available}
+              minLimit={order.limits.min}
+              maxLimit={order.limits.max}
+              windowMinutes={order.windowMinutes}
+              paymentMethods={order.paymentMethods}
+              lang="es"
               mode={mode}
-              onAction={onBuy}
+              onBuy={() => onBuy(order.id)}
             />
           ))
         )}
