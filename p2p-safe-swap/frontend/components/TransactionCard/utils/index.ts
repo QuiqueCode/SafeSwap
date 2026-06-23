@@ -6,12 +6,14 @@ export const translations = {
     window:    "Ventana",
     limits:    "Límites",
     buy:       "Comprar",
+    sell:      "Vender",
   },
   en: {
     available: "Available",
     window:    "Time window",
     limits:    "Limits",
     buy:       "Buy",
+    sell:      "Sell",
   },
 } satisfies Record<TransactionCardLang, object>;
 
