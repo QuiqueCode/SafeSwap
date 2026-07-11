@@ -48,7 +48,7 @@ export function PaymentBubble({
 
         {memo && (
           <p className={`text-sm ${isDark ? "text-[#95A29C]" : "text-[#54615B]"}`}>
-            "{memo}"
+            &ldquo;{memo}&rdquo;
           </p>
         )}
       </div>
