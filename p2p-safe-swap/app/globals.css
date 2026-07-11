@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Semantic tokens (theme-aware, defined per :root / .dark below) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -21,55 +22,72 @@
   --color-ring: var(--ring);
   --color-chat-bubble-outgoing: var(--chat-bubble-outgoing);
   --color-chat-bubble-outgoing-foreground: var(--chat-bubble-outgoing-foreground);
+
+  /* Raw brand palette (SafeSwap Visual Identity) — theme-independent */
+  --color-ink: #101b1d;
+  --color-ink-deep: #0a1213;
+  --color-ink-700: #16282a;
+  --color-green: #01a78f;
+  --color-green-dark: #016b5b;
+  --color-green-deep: #02201a;
+  --color-mint: #5fd6ac;
+  --color-mint-soft: #9ce7cc;
+  --color-mint-pale: #e6fbf2;
+  --color-spark: #1446f0;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Light theme — brand green-neutral surfaces, Ink text */
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
-  --primary: hsl(164 98% 33%);
-  --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(160 70% 60%);
-  --secondary-foreground: hsl(222.2 47.4% 11.2%);
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --accent: hsl(240 4.8% 95.9%);
-  --accent-foreground: hsl(240 5.9% 10%);
-  --destructive: hsl(0 84.2% 60.2%);
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(164 98% 33%);
-  --chat-bubble-outgoing: #052016;
-  --chat-bubble-outgoing-foreground: hsl(0 0% 98%);
+  --background: #f5fcf9;
+  --foreground: #101b1d;
+  --card: #ffffff;
+  --card-foreground: #101b1d;
+  --popover: #ffffff;
+  --popover-foreground: #101b1d;
+  --primary: #01a78f;
+  --primary-foreground: #ffffff;
+  --secondary: #5fd6ac;
+  --secondary-foreground: #101b1d;
+  --muted: #ebf4f0;
+  --muted-foreground: #54615b;
+  --accent: #e6fbf2;
+  --accent-foreground: #016b5b;
+  --destructive: #ff5957;
+  --border: #d2ded8;
+  --input: #d2ded8;
+  --ring: #01a78f;
+  --chat-bubble-outgoing: #02201a;
+  --chat-bubble-outgoing-foreground: #e6fbf2;
   --radius: 0.75rem;
 }
 
+/* Dark theme — mirrors the SafeSwap Landing (Ink canvas, mint accents) */
 .dark {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(240 10% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(240 10% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(164 98% 33%);
-  --primary-foreground: hsl(210 40% 98%);
-  --secondary: hsl(160 70% 60%);
-  --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(164 98% 33%);
+  --background: #0a1213;
+  --foreground: #e6fbf2;
+  --card: #101b1d;
+  --card-foreground: #e6fbf2;
+  --popover: #101b1d;
+  --popover-foreground: #e6fbf2;
+  --primary: #01a78f;
+  --primary-foreground: #ffffff;
+  --secondary: #5fd6ac;
+  --secondary-foreground: #101b1d;
+  --muted: #16282a;
+  --muted-foreground: #7f9a93;
+  --accent: #16282a;
+  --accent-foreground: #e6fbf2;
+  --destructive: #ff5957;
+  --border: #1c2e2c;
+  --input: #1c2e2c;
+  --ring: #5fd6ac;
+  --chat-bubble-outgoing: #016b5b;
+  --chat-bubble-outgoing-foreground: #e6fbf2;
 }
 
 * {
