@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Zap, Globe } from "lucide-react";
 import { Wordmark } from "@/frontend/components/brand/Logo";
+import { Reveal } from "@/frontend/components/motion/reveal";
 
 const TRUST_POINTS = [
   { icon: ShieldCheck, label: "Escrow-secured" },
@@ -16,7 +17,7 @@ export default function Home() {
         <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
       </div>
 
-      <div className="flex w-full max-w-xl flex-col items-center text-center">
+      <Reveal className="flex w-full max-w-xl flex-col items-center text-center">
         <Wordmark className="mb-10" />
 
         <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -26,7 +27,7 @@ export default function Home() {
 
         <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
           Swap USDC, peer to peer,{" "}
-          <span className="text-primary">secured by escrow.</span>
+          <span className="text-grad">secured by escrow.</span>
         </h1>
 
         <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -59,7 +60,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </main>
   );
 }
