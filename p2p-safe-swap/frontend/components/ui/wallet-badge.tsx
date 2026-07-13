@@ -12,10 +12,10 @@ const sizeClasses = {
 } as const;
 
 const badgeColors = [
-  "bg-[#EBF4F0] text-[#54615B]",
-  "bg-[#E1EBE6] text-[#24312B]",
-  "bg-[#D2DED8] text-[#1A2721]",
+  "bg-muted text-muted-foreground",
   "bg-primary/15 text-primary",
+  "bg-accent text-accent-foreground",
+  "bg-secondary text-secondary-foreground",
 ] as const;
 
 function hashAddress(address: string): number {

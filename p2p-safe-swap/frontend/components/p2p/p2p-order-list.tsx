@@ -2,6 +2,7 @@
 
 import { TransactionCard } from "@/frontend/components/TransactionCard/TransactionCard";
 import { TabBar } from "@/frontend/components/ui/tab-bar";
+import { Reveal } from "@/frontend/components/motion/reveal";
 import { cn } from "@/lib/utils";
 import { BestPriceCard } from "./best-price-card";
 import type { CurrencyPair, OrderMode, P2POrder } from "./types";
@@ -77,23 +78,24 @@ export function P2POrderList({
             No hay órdenes disponibles en este momento.
           </div>
         ) : (
-          sortedOrders.map((order) => (
-            <TransactionCard
-              key={order.id}
-              user={order.user.name}
-              address={order.user.address}
-              rating={order.user.rating}
-              operationCount={order.user.opsCount}
-              price={order.price}
-              available={order.available}
-              minLimit={order.limits.min}
-              maxLimit={order.limits.max}
-              windowMinutes={order.windowMinutes}
-              paymentMethods={order.paymentMethods}
-              lang="es"
-              mode={mode}
-              onBuy={() => onBuy(order.id)}
-            />
+          sortedOrders.map((order, index) => (
+            <Reveal key={order.id} delay={Math.min(index, 6) * 0.06}>
+              <TransactionCard
+                user={order.user.name}
+                address={order.user.address}
+                rating={order.user.rating}
+                operationCount={order.user.opsCount}
+                price={order.price}
+                available={order.available}
+                minLimit={order.limits.min}
+                maxLimit={order.limits.max}
+                windowMinutes={order.windowMinutes}
+                paymentMethods={order.paymentMethods}
+                lang="es"
+                mode={mode}
+                onBuy={() => onBuy(order.id)}
+              />
+            </Reveal>
           ))
         )}
       </section>

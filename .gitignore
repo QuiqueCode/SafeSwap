@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Local working context (personal notes, not part of the repo)
+z-context/
