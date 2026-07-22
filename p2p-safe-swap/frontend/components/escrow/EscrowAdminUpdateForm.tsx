@@ -41,12 +41,12 @@ export function EscrowAdminUpdateForm({
       <div
         role="alert"
         className={cn(
-          "flex flex-col items-center gap-2 rounded-2xl border border-border bg-card p-8 text-center",
+          "flex flex-col items-center gap-2 rounded-2xl border border-border bg-card p-8 text-center mt-10",
           className
         )}
       >
         <ShieldAlert className="text-muted-foreground" size={28} aria-hidden="true" />
-        <p className="text-sm font-medium text-muted-foreground">
+        <p className="text-sm font-medium text-muted-foreground ">
           Esta acción solo está disponible para la wallet admin.
         </p>
       </div>
